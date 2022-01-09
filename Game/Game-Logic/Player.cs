@@ -14,7 +14,6 @@ namespace Game_Logic
         public int CountOfFiguresAtDestination { get; set; }
 
         public List<int> FiguresAtStartHouse { get; set; }
-        public List<int> MyProperty { get; set; }
         public List<int> ActiveFiguresIDs { get; set; }
 
         public Player(int id)
