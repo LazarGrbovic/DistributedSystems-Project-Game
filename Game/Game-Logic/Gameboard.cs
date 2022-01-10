@@ -20,6 +20,21 @@ namespace Game_Logic
         public int Player_3_StartingPos { get { return 21; } }
         public int Player_4_StartingPos { get { return 31; } }
 
+        /*
+                            19      20      21       
+                            18      C1      22       
+                            17      C2      23
+                            16      C3      24
+            11  12  13  14  15      C4      25  26  27  28  29
+            10  B1  B2  B3  B4              D4  D3  D2  D1  30
+            09  08  07  06  05      A4      35  34  33  32  31
+                            04      A3      36               
+                            03      A2      37             
+                            02      A1      38              
+                            01      00      39              
+                          
+            */
+
         public int GetPlayerStartingPosition(PlayerEnum playerEnum)
         {
             switch (playerEnum)
