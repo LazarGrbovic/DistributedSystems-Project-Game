@@ -100,7 +100,9 @@ namespace Game_Console
             Console.WriteLine("]");
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write(">> ");
+            Console.ForegroundColor = color;
             var input = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Gray;
             return EnumConvertor.IntToFigureEnum(int.Parse(input));
         }
 
