@@ -30,6 +30,8 @@ namespace Game_Logic
         {
             this.CountOfActiveFigures++;
             this.ActiveFiguresIDs.Add(figureID);
+            this.CountOfFiguresAtStartHouse--;
+            this.FiguresAtStartHouse.Remove(figureID);
         }
 
         public void IncreaseFiguresAtDestination()

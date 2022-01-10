@@ -12,15 +12,17 @@ namespace Game_Console
     {
         public void RenderGameboard(GameStatus gameStatus)
         {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Gray;
             int xPos = 0;
             int yPos = 0;
             
-            for (int i = 0; i < 39; i++)
+            for (int i = 0; i < 40; i++)
             {
                 //var cell = gameStatus.Cells[i];
                 this.GetCoordinatesOfCell(i, ref xPos, ref yPos);
                 //var color = this.GetColor(i);
-                
+
                 this.RenderCell(xPos, yPos, this.GetColor(gameStatus.Cells[i].Player), this.GetFigure(i, gameStatus));
             }
 
@@ -60,19 +62,19 @@ namespace Game_Console
 
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.SetCursorPosition(10, yPos + 2);
-            Console.Write("ABCD");
+            Console.Write(this.FigureListToString(gameStatus.Players[0].FiguresAtStartHouse));
 
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.SetCursorPosition(30, yPos + 2);
-            Console.Write("ABCD");
+            Console.Write(this.FigureListToString(gameStatus.Players[1].FiguresAtStartHouse));
 
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.SetCursorPosition(50, yPos + 2);
-            Console.Write("ABCD");
+            Console.Write(this.FigureListToString(gameStatus.Players[2].FiguresAtStartHouse));
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.SetCursorPosition(70, yPos + 2);
-            Console.Write("ABCD");
+            Console.Write(this.FigureListToString(gameStatus.Players[3].FiguresAtStartHouse));
         }
 
         public int GetUserInput(int playerID, List<int> figures)
@@ -102,8 +104,8 @@ namespace Game_Console
             {
                 case 1: return ConsoleColor.Cyan;
                 case 2: return ConsoleColor.Magenta;
-                case 3: return ConsoleColor.Green;
-                case 4: return ConsoleColor.Blue;              
+                case 3: return ConsoleColor.Blue;
+                case 4: return ConsoleColor.Green;              
                 default:
                     throw new Exception("Invalid PlayerID");
             }
@@ -189,18 +191,191 @@ namespace Game_Console
             switch (gameStatus.Cells[count].FigureID)
             {
                 case 1:
-                    return "A";
+                    return "1";
                 case 2:
-                    return "B";
+                    return "2";
                 case 3: 
-                     return "C";
+                     return "3";
                 case 4: 
-                    return "D";
+                    return "4";
                 default:
                     throw new Exception("Invalid FigureID");
             }
         }
 
+        private void GetCoordinatesOfCell(int id, ref int x, ref int y)
+        {
+            switch (id)
+            {
+                case 0:
+                    x = 44;
+                    y = 42;
+                    break;
+                case 1:
+                    x = 36;
+                    y = 42;
+                    break;
+                case 2:
+                    x = 36;
+                    y = 40;
+                    break;
+                case 3:
+                    x = 36;
+                    y = 38;
+                    break;
+                case 4:
+                    x = 36;
+                    y = 36;
+                    break;
+                case 5:
+                    x = 36;
+                    y = 34;
+                    break;
+                case 6:
+                    x = 28;
+                    y = 34;
+                    break;
+                case 7:
+                    x = 20;
+                    y = 34;
+                    break;
+                case 8:
+                    x = 12;
+                    y = 34;
+                    break;
+                case 9:
+                    x = 4;
+                    y = 34;
+                    break;
+                case 10:
+                    x = 4;
+                    y = 32;
+                    break;
+
+                case 11:
+                    x = 4;
+                    y = 30;
+                    break;
+                case 12:
+                    x = 12;
+                    y = 30;
+                    break;
+                case 13:
+                    x = 20;
+                    y = 30;
+                    break;
+                case 14:
+                    x = 28;
+                    y = 30;
+                    break;
+                case 15:
+                    x = 36;
+                    y = 30;
+                    break;
+                case 16:
+                    x = 36;
+                    y = 28;
+                    break;
+                case 17:
+                    x = 36;
+                    y = 26;
+                    break;
+                case 18:
+                    x = 36;
+                    y = 24;
+                    break;
+                case 19:
+                    x = 36;
+                    y = 22;
+                    break;
+                case 20:
+                    x = 44;
+                    y = 22;
+                    break;
+                case 21:
+                    x = 52;
+                    y = 22;
+                    break;
+
+                case 22:
+                    x = 52;
+                    y = 24;
+                    break;
+                case 23:
+                    x = 52;
+                    y = 26;
+                    break;
+                case 24:
+                    x = 52;
+                    y = 28;
+                    break;
+                case 25:
+                    x = 52;
+                    y = 30;
+                    break;
+                case 26:
+                    x = 60;
+                    y = 30;
+                    break;
+                case 27:
+                    x = 68;
+                    y = 30;
+                    break;
+                case 28:
+                    x = 76;
+                    y = 30;
+                    break;
+                case 29:
+                    x = 84;
+                    y = 30;
+                    break;
+                case 30:
+                    x = 84;
+                    y = 32;
+                    break;
+                case 31:
+                    x = 84;
+                    y = 34;
+                    break;
+                case 32:
+                    x = 76;
+                    y = 34;
+                    break;
+
+                case 33:
+                    x = 68;
+                    y = 34;
+                    break;
+                case 34:
+                    x = 60;
+                    y = 34;
+                    break;
+                case 35:
+                    x = 52;
+                    y = 34;
+                    break;
+                case 36:
+                    x = 52;
+                    y = 36;
+                    break;
+                case 37:
+                    x = 52;
+                    y = 38;
+                    break;
+                case 38:
+                    x = 52;
+                    y = 40;
+                    break;
+                case 39:
+                    x = 52;
+                    y = 42;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        /*
         private void GetCoordinatesOfCell(int id, ref int x, ref int y)
         {
             switch (id)
@@ -372,5 +547,6 @@ namespace Game_Console
                     break;
             }
         }
+        */
     }
 }

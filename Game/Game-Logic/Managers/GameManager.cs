@@ -35,7 +35,7 @@ namespace Game_Logic.Managers
                     players.Add(player.Player);
                 }
                 var gameStatus = new GameStatus(this.gameboard.Cells, players.ToArray());
-                this.FireOnGameStatusChanged(gameStatus);    
+                this.FireOnGameStatusChanged(gameStatus);
             }
         }
       
@@ -68,7 +68,7 @@ namespace Game_Logic.Managers
 
         private void HandlePlayerWithNoActiveFigures(EnhancedPlayer enhancedPlayer)
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 1; i < 4; i++)
             {
                 int diceNumber = this.RollDice();
                 if (diceNumber == 6)
