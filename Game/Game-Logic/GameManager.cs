@@ -27,8 +27,7 @@ namespace Game_Logic
         }
         public void StartGame()
         {
-            var gameStatus = new GameStatus(this.gameboard.Cells, this.players);
-            this.clientContract.HandleGameChanged(gameStatus);
+            this.NotifyClient();
             while (!this.gameFinished)
             {
                 this.HandleMove(this.activePlayer);
@@ -80,7 +79,7 @@ namespace Game_Logic
 
             this.gameboard.Cells[pos].SetPlayerAndFigure(player.ID, input);
             player.DecreaseFiguresAtStart(input);
-            this.NotifyClient(new GameStatus(this.gameboard.Cells, this.players));
+            this.NotifyClient();
         }
 
         private void HandlePlayerWithNoActiveFigures(Player player)
@@ -114,11 +113,12 @@ namespace Game_Logic
 
             this.gameboard.Cells[pos].SetPlayerAndFigure(player.ID, figure);
             
-            this.NotifyClient(new GameStatus(this.gameboard.Cells, this.players));
+            this.NotifyClient();
         }
 
-        private void NotifyClient(GameStatus gameStatus)
+        private void NotifyClient()
         {
+            var gameStatus = new GameStatus(this.gameboard.Cells, this.players, this.destinationCells);
             this.clientContract.HandleGameChanged(gameStatus);
         }
 
