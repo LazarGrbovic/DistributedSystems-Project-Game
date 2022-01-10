@@ -11,8 +11,9 @@ namespace Game_Logic
     {
         private PlayerEnum player;
 
-        public DestinationCell(PlayerEnum player)
+        public DestinationCell(PlayerEnum player, int entryPos)
         {
+            this.EntryPos = entryPos;
             this.player = player;
             this.Position_1 = FigureEnum.NoFigure;
             this.Position_2 = FigureEnum.NoFigure;
@@ -20,6 +21,7 @@ namespace Game_Logic
             this.Position_4 = FigureEnum.NoFigure;
         }
 
+        public int EntryPos { get; private set; }
         public FigureEnum Position_1 { get; private set; }
         public FigureEnum Position_2 { get; private set; }
         public FigureEnum Position_3 { get; private set; }
