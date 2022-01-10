@@ -9,7 +9,7 @@ namespace Game_Logic.Utilities
 {
     public static class GameManagerUtility
     {
-        private static int GetDestinationEntryOfPlayer(PlayerEnum player, Gameboard gameboard)
+        public static int GetDestinationEntryOfPlayer(PlayerEnum player, Gameboard gameboard)
         {
             switch (player)
             {
@@ -28,7 +28,7 @@ namespace Game_Logic.Utilities
             }
         }
 
-        private static Player GetPlayerByPlayerEnum(PlayerEnum playerID, Player[] players)
+        public static Player GetPlayerByPlayerEnum(PlayerEnum playerID, Player[] players)
         {
             foreach (var player in players)
             {
@@ -40,7 +40,7 @@ namespace Game_Logic.Utilities
 
             throw new Exception("Invalid Player ID");
         }
-        private static int CalculateNewPos(int oldPos, int newPos)
+        public static int CalculateNewPos(int oldPos, int newPos)
         {
             if (oldPos + newPos > 39) { return (oldPos + newPos) - 40; }
             return oldPos + newPos;
