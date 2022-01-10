@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Game_Logic.Contracts;
 using Game_Logic.Enums;
 using Game_Logic.Packets;
+using Game_Logic.Utilities;
 
 namespace Game_Logic
 {
@@ -52,7 +53,7 @@ namespace Game_Logic
             int oldPos = this.gameboard.GetPosOfPlayersFigure(player.ID, figureInput);
             this.gameboard.Cells[oldPos].RemovePlayer();
             
-            int newPos = this.CalculateNewPos(oldPos, dice);
+            int newPos = GameManagerUtility.CalculateNewPos(oldPos, dice);
             
             //if (this.gameboard.Cells[newPos].Player != PlayerEnum.NoPlayer)
             //{ 
@@ -73,7 +74,7 @@ namespace Game_Logic
             {
                 var oldFigureID = this.gameboard.Cells[pos].Figure;
                 var oldPlayerID = this.gameboard.Cells[pos].Player;
-                var oldPlayer = this.GetPlayerByPlayerEnum(oldPlayerID);
+                var oldPlayer = GameManagerUtility.GetPlayerByPlayerEnum(oldPlayerID, this.players);
                 oldPlayer.DecreaseActiveFiguresAndIncreaseStartFigures(oldFigureID);
             }
 
@@ -107,7 +108,7 @@ namespace Game_Logic
             if (this.gameboard.Cells[pos].Player != PlayerEnum.NoPlayer)
             {
                 var oldFigure = this.gameboard.Cells[pos].Figure;
-                var oldPlayer = this.GetPlayerByPlayerEnum(this.gameboard.Cells[pos].Player);
+                var oldPlayer = GameManagerUtility.GetPlayerByPlayerEnum(this.gameboard.Cells[pos].Player, this.players);
                 oldPlayer.DecreaseActiveFiguresAndIncreaseStartFigures(oldFigure);                
             }
 
@@ -150,7 +151,7 @@ namespace Game_Logic
             { 
                 var newCounter = i + 1;  
                 this.players[i] = new Player(EnumConverter.IntToPlayerEnum(newCounter));
-                this.destinationCells[i] = new DestinationCell(EnumConverter.IntToPlayerEnum(newCounter), this.GetDestinationEntryOfPlayer(EnumConverter.IntToPlayerEnum(newCounter)));
+                this.destinationCells[i] = new DestinationCell(EnumConverter.IntToPlayerEnum(newCounter), GameManagerUtility.GetDestinationEntryOfPlayer(EnumConverter.IntToPlayerEnum(newCounter), this.gameboard));
             }
             
             this.activePlayer = this.players[0];
