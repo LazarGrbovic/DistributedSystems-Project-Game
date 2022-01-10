@@ -66,7 +66,7 @@ namespace Game_Logic
 
         private int CalculateNewPos(int oldPos, int newPos)
         {
-            if (oldPos + newPos > 39) { return newPos - 1; }
+            if (oldPos + newPos > 39) { return (oldPos + newPos) - 40; }
             return oldPos + newPos;
         }
 
