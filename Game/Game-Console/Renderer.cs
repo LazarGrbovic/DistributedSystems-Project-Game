@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Game_Logic.Packets;
-using Game_Logic;
+using Game_Logic.Enums;
 
 namespace Game_Console
 {
@@ -62,52 +62,46 @@ namespace Game_Console
 
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.SetCursorPosition(10, yPos + 2);
-            Console.Write(this.FigureListToString(gameStatus.Players[0].FiguresAtStartHouse));
+            Console.Write(EnumConvertor.FigureListToString(gameStatus.Players[0].FiguresAtStart));
 
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.SetCursorPosition(30, yPos + 2);
-            Console.Write(this.FigureListToString(gameStatus.Players[1].FiguresAtStartHouse));
+            Console.Write(EnumConvertor.FigureListToString(gameStatus.Players[1].FiguresAtStart));
 
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.SetCursorPosition(50, yPos + 2);
-            Console.Write(this.FigureListToString(gameStatus.Players[2].FiguresAtStartHouse));
+            Console.Write(EnumConvertor.FigureListToString(gameStatus.Players[2].FiguresAtStart));
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.SetCursorPosition(70, yPos + 2);
-            Console.Write(this.FigureListToString(gameStatus.Players[3].FiguresAtStartHouse));
+            Console.Write(EnumConvertor.FigureListToString(gameStatus.Players[3].FiguresAtStart));
         }
 
-        public int GetUserInput(int playerID, List<int> figures)
+        public FigureEnum GetUserInput(int dice, PlayerEnum playerID, List<FigureEnum> figures)
         {
             Console.ForegroundColor= ConsoleColor.Gray;
             Console.SetCursorPosition(2, 52);
-            Console.WriteLine($"Player {playerID}, Please Select Figure [Figures Available: {this.FigureListToString(figures)}]");
-            return int.Parse(Console.ReadLine());
+            Console.WriteLine($"Player {playerID}, Please Select Figure To Make {dice} steps [Figures Available: {EnumConvertor.FigureListToString(figures)}]");
+            var input = Console.ReadLine();
+            return EnumConvertor.IntToFigureEnum(int.Parse(input));
         }
 
-        private string FigureListToString(List<int> figures)
+        private ConsoleColor GetColor(PlayerEnum player)
         {
-            var res = String.Empty;
-            foreach (int figuresItem in figures)
+            switch (player)
             {
-                res += figuresItem.ToString();
-                res += " ";
-            }
-
-            return res;
-        }
-
-        private ConsoleColor GetColor(Player player)
-        {
-            if (player == null) { return ConsoleColor.Gray; }
-            switch (player.ID)
-            {
-                case 1: return ConsoleColor.Cyan;
-                case 2: return ConsoleColor.Magenta;
-                case 3: return ConsoleColor.Blue;
-                case 4: return ConsoleColor.Green;              
+                case PlayerEnum.Player_1:
+                    return ConsoleColor.Cyan;
+                case PlayerEnum.Player_2:
+                    return ConsoleColor.Magenta;
+                case PlayerEnum.Player_3:
+                    return ConsoleColor.Blue;
+                case PlayerEnum.Player_4:
+                    return ConsoleColor.Green;
+                case PlayerEnum.NoPlayer:
+                    return ConsoleColor.Gray; ;
                 default:
-                    throw new Exception("Invalid PlayerID");
+                    throw new Exception("Invalid Player Enum");
             }
         }
 
@@ -186,17 +180,17 @@ namespace Game_Console
 
         private string GetFigure(int count, GameStatus gameStatus)
         {
-            if (gameStatus.Cells[count].Player == null)  { return String.Empty;  }
+            if (gameStatus.Cells[count].Player == PlayerEnum.NoPlayer)  { return String.Empty;  }
 
-            switch (gameStatus.Cells[count].FigureID)
+            switch (gameStatus.Cells[count].Figure)
             {
-                case 1:
+                case FigureEnum.Figure_1:
                     return "1";
-                case 2:
+                case FigureEnum.Figure_2:
                     return "2";
-                case 3: 
+                case FigureEnum.Figure_3: 
                      return "3";
-                case 4: 
+                case FigureEnum.Figure_4: 
                     return "4";
                 default:
                     throw new Exception("Invalid FigureID");

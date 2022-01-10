@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{19E8C93F-71F5-4B90-9C39-A0AEAEE9255E}</ProjectGuid>
+    <ProjectGuid>{5991131E-82C0-41F1-866A-DDAC619A6EBE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Game_Logic</RootNamespace>
@@ -41,23 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EnhancedPlayer.cs" />
+    <Compile Include="Cell.cs" />
     <Compile Include="Contracts\IClientContract.cs" />
-    <Compile Include="Figure.cs" />
+    <Compile Include="EnhancedPlayer.cs" />
+    <Compile Include="Enums\EnumConverter.cs" />
+    <Compile Include="Enums\FigureEnum.cs" />
+    <Compile Include="Enums\PlayerEnum.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Gameboard.cs" />
-    <Compile Include="GameboardCell.cs" />
-    <Compile Include="Managers\GameManager.cs" />
+    <Compile Include="GameManager.cs" />
     <Compile Include="Packets\GameStatus.cs" />
-    <Compile Include="Packets\MoveRequestToClient.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Validations\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Gameboard-Image.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

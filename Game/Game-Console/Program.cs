@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Game_Logic;
-using Game_Logic.Packets;
 
 namespace Game_Console
 {
@@ -12,8 +10,6 @@ namespace Game_Console
     {
         static void Main(string[] args)
         {
-            Console.WindowHeight = 40;
-
             var gameRunner = new GameRunner();
             gameRunner.RunGame();
         }

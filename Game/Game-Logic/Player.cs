@@ -3,48 +3,56 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Game_Logic.Enums;
 
 namespace Game_Logic
 {
     public class Player
     {
-        public int ID { get; private set; }
-        public int CountOfActiveFigures { get; private set; }   
-        public int CountOfFiguresAtStartHouse  { get; set; }
-        public int CountOfFiguresAtDestination { get; set; }
-
-        public List<int> FiguresAtStartHouse { get; set; }
-        public List<int> ActiveFiguresIDs { get; set; }
+        public PlayerEnum ID { get; private set; }
+        public List<FigureEnum> ActiveFigures { get; private set; }
+        public List<FigureEnum> FiguresAtDestination { get; private set; }
+        public List<FigureEnum> FiguresAtStart { get; private set; }
 
         public Player(int id)
         {
-            this.FiguresAtStartHouse = new List<int> {1, 2, 3 ,4};
-            this.ID = id;
-            this.CountOfActiveFigures = 0;
-            this.CountOfFiguresAtStartHouse = 4;
-            this.CountOfFiguresAtDestination = 0;
-            this.ActiveFiguresIDs = new List<int>();
+            this.SetPlayerEnumID(id);
+            this.ActiveFigures = new List<FigureEnum>();
+            this.FiguresAtStart = new List<FigureEnum>() { FigureEnum.Figure_1, FigureEnum.Figure_2, FigureEnum.Figure_3, FigureEnum.Figure_4 };
+            this.FiguresAtDestination = new List<FigureEnum>();
         }
 
-        public void IncreaseActiveFigures(int figureID)
+        public void DecreaseFiguresAtStart(FigureEnum figure)
         {
-            this.CountOfActiveFigures++;
-            this.ActiveFiguresIDs.Add(figureID);
-            this.CountOfFiguresAtStartHouse--;
-            this.FiguresAtStartHouse.Remove(figureID);
+            this.FiguresAtStart.Remove(figure);
+            this.ActiveFigures.Add(figure);
         }
 
-        public void IncreaseFiguresAtDestination()
+        public void DecreaseActiveFiguresAndIncreaseStartFigures(FigureEnum figure)
         {
-            this.CountOfFiguresAtDestination++;
-            this.CountOfActiveFigures--;
+            this.ActiveFigures.Remove(figure);
+            this.FiguresAtStart.Add(figure);
         }
 
-        public void SetFigureAtStartHouse(int figureID)
+        private void SetPlayerEnumID(int id)
         {
-            this.CountOfActiveFigures--;
-            this.FiguresAtStartHouse.Add(figureID);
-            this.ActiveFiguresIDs.Remove(figureID);
+            switch (id)
+            {
+                case 1:
+                    this.ID = PlayerEnum.Player_1; 
+                    break;
+                case 2:
+                    this.ID = PlayerEnum.Player_2;
+                    break;
+                case 3:
+                    this.ID = PlayerEnum.Player_3;
+                    break;
+                case 4:
+                    this.ID = PlayerEnum.Player_4;
+                    break;
+                default:
+                    throw new Exception("Invalid ID");
+            }
         }
     }
 }

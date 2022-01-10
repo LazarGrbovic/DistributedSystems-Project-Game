@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{92F6E9AB-CAB6-4B68-AB58-6085A9AE7827}</ProjectGuid>
+    <ProjectGuid>{5B475557-41A0-4DC6-830F-31DD31E36C1A}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Game_Console</RootNamespace>
     <AssemblyName>Game-Console</AssemblyName>
@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsoleContract.cs" />
+    <Compile Include="EnumConvertor.cs" />
     <Compile Include="GameboardCellVM.cs" />
     <Compile Include="GameRunner.cs" />
     <Compile Include="PlayerColorsEnum.cs" />
@@ -56,7 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Game-Logic\Game-Logic.csproj">
-      <Project>{19e8c93f-71f5-4b90-9c39-a0aeaee9255e}</Project>
+      <Project>{5991131e-82c0-41f1-866a-ddac619a6ebe}</Project>
       <Name>Game-Logic</Name>
     </ProjectReference>
   </ItemGroup>

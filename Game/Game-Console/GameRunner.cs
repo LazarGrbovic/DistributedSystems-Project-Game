@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Game_Logic.Packets;
 using Game_Logic;
 using Game_Logic.Contracts;
+using Game_Logic.Enums;
 
 namespace Game_Console
 {
@@ -35,21 +36,21 @@ namespace Game_Console
             Console.WriteLine("Welcome to the \"Mensch ärgere dich nicht! / Man don't get angry game!\"");
 
             var game = new Game(this);
-            this._renderer = new Renderer();
+            this._renderer = new Renderer();            
 
             //game.OnChangedGameStatus += this.HandleOnChangedGameStatus;            
             game.StartGame();
             Console.ReadLine();
         }
 
-        public void HandleGameStatusUpdate(GameStatus gameStatus)
+        public void HandleGameChanged(GameStatus gameStatus)
         {
             this._renderer.RenderGameboard(gameStatus);
         }
 
-        public int RequestFigureID(int playerID, List<int> figureIDs)
+        public FigureEnum GetUserInput(int dice, PlayerEnum playerID, List<FigureEnum> figureIDs)
         {
-            return this._renderer.GetUserInput(playerID, figureIDs);
+            return this._renderer.GetUserInput(dice, playerID, figureIDs);
         }
 
         

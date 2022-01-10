@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Game_Logic.Packets;
+using Game_Logic.Enums;
 
 namespace Game_Logic.Contracts
 {
     public interface IClientContract
     {
-        int RequestFigureID(int playerID, List<int> figureIDs);
+        FigureEnum GetUserInput(int dice, PlayerEnum playerID, List<FigureEnum> figureEnum);
 
-        void HandleGameStatusUpdate(GameStatus gameStatus);
+        void HandleGameChanged(GameStatus gameStatus);
     }
 }
