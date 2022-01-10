@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game_Logic.Enums
 {
-    public static class Converter
+    public static class EnumConverter
     {
         public static int PlayerEnumToInt(PlayerEnum playerEnum)
         {
