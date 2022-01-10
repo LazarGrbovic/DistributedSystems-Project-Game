@@ -65,12 +65,6 @@ namespace Game_Logic
             this.UpdatePlayerAndGameboardFigures(newPos, player, figureInput);
         }
 
-        private int CalculateNewPos(int oldPos, int newPos)
-        {
-            if (oldPos + newPos > 39) { return (oldPos + newPos) - 40; }
-            return oldPos + newPos;
-        }
-
         private void HandlePlayerWithActiveFiguresAndDice6(int dice, Player player)
         {
             FigureEnum input = this.clientContract.GetUserInput(dice, player.ID, player.FiguresAtStart);
@@ -127,19 +121,6 @@ namespace Game_Logic
             this.clientContract.HandleGameChanged(gameStatus);
         }
 
-        private Player GetPlayerByPlayerEnum(PlayerEnum playerID)
-        {
-            foreach (var player in this.players)
-            {
-                if (player.ID == playerID)
-                {
-                    return player;
-                }
-            }
-
-            throw new Exception("Invalid Player ID");
-        }
-
         private int RollDice() { return this.random.Next(1,7); }
 
         private void SetNextActivePlayer()
@@ -174,25 +155,6 @@ namespace Game_Logic
             
             this.activePlayer = this.players[0];
             this.random = new Random();
-        }
-
-        private int GetDestinationEntryOfPlayer(PlayerEnum player)
-        {
-            switch (player)
-            {
-                case PlayerEnum.Player_1:
-                    return this.gameboard.Player_1_DestinationEntry;
-                case PlayerEnum.Player_2:
-                    return this.gameboard.Player_2_DestinationEntry;
-                case PlayerEnum.Player_3:
-                    return this.gameboard.Player_3_DestinationEntry;
-                case PlayerEnum.Player_4:
-                    return this.gameboard.Player_4_DestinationEntry;
-                case PlayerEnum.NoPlayer:
-                    throw new Exception("Invalid PlayerEnum");
-                default:
-                    throw new Exception("Invalid PlayerEnum");
-            }
         }
     }
 }
