@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Cell.cs" />
     <Compile Include="Contracts\IClientContract.cs" />
+    <Compile Include="DestinationCell.cs" />
     <Compile Include="EnhancedPlayer.cs" />
     <Compile Include="Enums\EnumConverter.cs" />
     <Compile Include="Enums\FigureEnum.cs" />
