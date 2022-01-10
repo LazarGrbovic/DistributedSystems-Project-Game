@@ -17,6 +17,7 @@ namespace Game_Logic
         private bool gameFinished;
         private Random random;
         private IClientContract clientContract;
+        private DestinationCell[] destinationCells;
 
         public GameManager(IClientContract clientContract)
         {
@@ -162,9 +163,36 @@ namespace Game_Logic
             this.gameboard = new Gameboard();
             this.gameFinished = false;
             this.players = new Player[4];
-            for (int i = 0; i < 4; i++) { var newCounter = i + 1;  this.players[i] = new Player(newCounter); }
+            this.destinationCells = new DestinationCell[4];
+            
+            for (int i = 0; i < 4; i++) 
+            { 
+                var newCounter = i + 1;  
+                this.players[i] = new Player(EnumConverter.IntToPlayerEnum(newCounter));
+                this.destinationCells[i] = new DestinationCell(EnumConverter.IntToPlayerEnum(newCounter), this.GetDestinationEntryOfPlayer(EnumConverter.IntToPlayerEnum(newCounter)));
+            }
+            
             this.activePlayer = this.players[0];
             this.random = new Random();
+        }
+
+        private int GetDestinationEntryOfPlayer(PlayerEnum player)
+        {
+            switch (player)
+            {
+                case PlayerEnum.Player_1:
+                    return this.gameboard.Player_1_DestinationEntry;
+                case PlayerEnum.Player_2:
+                    return this.gameboard.Player_2_DestinationEntry;
+                case PlayerEnum.Player_3:
+                    return this.gameboard.Player_3_DestinationEntry;
+                case PlayerEnum.Player_4:
+                    return this.gameboard.Player_4_DestinationEntry;
+                case PlayerEnum.NoPlayer:
+                    throw new Exception("Invalid PlayerEnum");
+                default:
+                    throw new Exception("Invalid PlayerEnum");
+            }
         }
     }
 }
