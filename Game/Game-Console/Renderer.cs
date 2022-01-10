@@ -81,7 +81,25 @@ namespace Game_Console
         {
             Console.ForegroundColor= ConsoleColor.Gray;
             Console.SetCursorPosition(2, 52);
-            Console.WriteLine($"Player {playerID}, Please Select Figure To Make {dice} steps [Figures Available: {EnumConvertor.FigureListToString(figures)}]");
+            
+            //Console.WriteLine($"Player {EnumConvertor.PlayerEnumToInt(playerID)}, Please Select Figure To Make {dice} steps [Figures Available: {EnumConvertor.FigureListToString(figures)}]");
+            
+            var color = this.GetColor(playerID);
+            Console.ForegroundColor = color;
+            Console.Write("Player ");
+            Console.Write(EnumConvertor.PlayerEnumToInt(playerID));
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write(", Please Select Figure To Make");
+            Console.ForegroundColor = color;
+            Console.Write($" {dice} ");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write("steps [Figures Available: ");
+            Console.ForegroundColor = color;
+            Console.Write(EnumConvertor.FigureListToString(figures));
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine("]");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write(">> ");
             var input = Console.ReadLine();
             return EnumConvertor.IntToFigureEnum(int.Parse(input));
         }
