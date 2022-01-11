@@ -33,5 +33,11 @@ namespace Game_Logic
             this.ActiveFigures.Remove(figure);
             this.FiguresAtStart.Add(figure);
         }
+
+        public void DecreaseActiveFiguresAndIncreaseFiguresAtDestination(FigureEnum figure)
+        {
+            this.ActiveFigures.Remove(figure);
+            this.FiguresAtDestination.Add(figure);
+        }
     }
 }

@@ -45,6 +45,7 @@
     <Compile Include="Contracts\IClientContract.cs" />
     <Compile Include="DestinationCell.cs" />
     <Compile Include="EnhancedPlayer.cs" />
+    <Compile Include="Enums\DestinationCellFigureHoldersEnum.cs" />
     <Compile Include="Enums\EnumConverter.cs" />
     <Compile Include="Enums\FigureEnum.cs" />
     <Compile Include="Enums\PlayerEnum.cs" />
@@ -55,6 +56,9 @@
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\GameManagerUtility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="schmidt-spiele-mensch-aergere-dich-nicht-edition-schwarz~4.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

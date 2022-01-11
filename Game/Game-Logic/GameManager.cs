@@ -44,20 +44,47 @@ namespace Game_Logic
         private void HandlePlayerWithActiveFigures(Player player)
         {
             int dice = this.RollDice();
-
-            if (dice == 6 && player.FiguresAtStart.Count > 0) { this.HandlePlayerWithActiveFiguresAndDice6(dice, player); return; }
+            Math.Sqrt(dice);
+            if (dice == 6 && player.FiguresAtStart.Count > 0) 
+            { 
+                this.HandlePlayerWithActiveAndStartFiguresAndDice6(dice, player); 
+                return; 
+            }
             
             FigureEnum figureInput = this.clientContract.GetUserInput(dice, player.ID, player.ActiveFigures);
-            
             int oldPos = this.gameboard.GetPosOfPlayersFigure(player.ID, figureInput);
+
+            if (GameManagerUtility.CheckIfPlayerWillEnterDestination(player.ID, oldPos, dice, this.destinationCells))
+            { 
+                this.HandlePlayerEnteringDestination(player, oldPos, dice, figureInput); 
+                return; 
+            }
+            
             this.gameboard.Cells[oldPos].RemovePlayer();
             
             int newPos = GameManagerUtility.CalculateNewPos(oldPos, dice);
-
             this.UpdatePlayerAndGameboardFigures(newPos, player, figureInput);
         }
 
-        private void HandlePlayerWithActiveFiguresAndDice6(int dice, Player player)
+        private void HandlePlayerEnteringDestination(Player player, int oldPos, int dice, FigureEnum figureEnum)
+        {
+            var figureHolderPlace = GameManagerUtility.GetPlaceInTheDestination(player.ID, oldPos, dice, this.destinationCells);
+            var destinationCellTemp = GameManagerUtility.GetDestinationCellByPlayer(player, this.destinationCells);
+
+            int pos = 0;
+            foreach (var destCell in this.destinationCells)
+            {
+                if (destCell == destinationCellTemp) { break; }
+                pos = pos + 1;
+            }
+
+            this.destinationCells[pos].SetPosition(figureHolderPlace, figureEnum, player.ID);
+            player.DecreaseActiveFiguresAndIncreaseFiguresAtDestination(figureEnum);
+            this.gameboard.Cells[oldPos].RemovePlayer();
+            this.NotifyClient();
+        }
+
+        private void HandlePlayerWithActiveAndStartFiguresAndDice6(int dice, Player player)
         {
             FigureEnum input = this.clientContract.GetUserInput(dice, player.ID, player.FiguresAtStart);
             int pos = this.gameboard.GetPlayerStartingPosition(player.ID);

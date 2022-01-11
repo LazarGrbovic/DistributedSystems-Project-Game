@@ -16,7 +16,30 @@ namespace Game_Console
             Console.ForegroundColor = ConsoleColor.Gray;
             int xPos = 0;
             int yPos = 0;
-            
+
+            for (int i = 0; i < 4; i++)
+            {
+                var newCounter = i + 1;
+                this.GetCoordinatesOfDestinationCells(EnumConverter.IntToPlayerEnum(newCounter), ref xPos, ref yPos);
+                var destinationCell = gameStatus.DestinationCells[i];
+                var destinationColor = ConsoleColor.Gray;
+
+                for (int j = 0; j < 4; j++)
+                {
+                    var newNestedCounter = j + 1;
+                    this.RenderCell(xPos, yPos, destinationColor, Game_Console.EnumConvertor.GetFigureOfDestiantionCelL(newNestedCounter, destinationCell));
+
+                    if (i == 0) { yPos = yPos - 2; destinationColor = ConsoleColor.Cyan; }
+                    else if (i == 1) { xPos = xPos + 8; destinationColor = ConsoleColor.Magenta;  }
+                    else if (i == 2) { yPos = yPos + 2; destinationColor = ConsoleColor.Blue; }
+                    else { xPos = xPos - 8; destinationColor = ConsoleColor.Green;  }
+                }
+            }
+
+            xPos = 0;
+            yPos = 0;
+            Console.ForegroundColor = ConsoleColor.Gray;
+
             for (int i = 0; i < 40; i++)
             {
                 //var cell = gameStatus.Cells[i];
@@ -25,6 +48,8 @@ namespace Game_Console
 
                 this.RenderCell(xPos, yPos, this.GetColor(gameStatus.Cells[i].Player), this.GetFigure(i, gameStatus));
             }
+
+            
 
             /*
             Console.WriteLine("                19      20      21       ");  
@@ -214,6 +239,33 @@ namespace Game_Console
                     return "4";
                 default:
                     throw new Exception("Invalid FigureID");
+            }
+        }
+
+        private void GetCoordinatesOfDestinationCells(PlayerEnum player, ref int x, ref int y)
+        {
+            switch (player)
+            {
+                case PlayerEnum.Player_1:
+                    x = 44;
+                    y = 40;
+                    return;
+                case PlayerEnum.Player_2:
+                    x = 12;
+                    y = 32;
+                    return;
+                case PlayerEnum.Player_3:
+                    x = 44;
+                    y = 24;
+                    break;
+                case PlayerEnum.Player_4:
+                    x = 76;
+                    y = 32;
+                    break;
+                case PlayerEnum.NoPlayer:
+                    break;
+                default:
+                    break;
             }
         }
 

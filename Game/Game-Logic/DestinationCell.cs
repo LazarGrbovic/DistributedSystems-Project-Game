@@ -9,12 +9,12 @@ namespace Game_Logic
 {
     public class DestinationCell
     {
-        private PlayerEnum player;
+        public PlayerEnum Player { get; private set; }
 
         public DestinationCell(PlayerEnum player, int entryPos)
         {
             this.EntryPos = entryPos;
-            this.player = player;
+            this.Player = player;
             this.Position_1 = FigureEnum.NoFigure;
             this.Position_2 = FigureEnum.NoFigure;
             this.Position_3 = FigureEnum.NoFigure;
@@ -27,28 +27,51 @@ namespace Game_Logic
         public FigureEnum Position_3 { get; private set; }
         public FigureEnum Position_4 { get; private set; }
 
-        public void SetPosition(int pos, FigureEnum figure, PlayerEnum player)
+        //public void SetPosition(int pos, FigureEnum figure, PlayerEnum player)
+        //{
+        //    if (this.Player != player) { throw new Exception("Player Does Match With The Destination House"); }
+
+        //    switch (pos)
+        //    {
+        //        case 1:
+        //            this.Position_1 = figure;
+        //            break;
+        //        case 2:
+        //            this.Position_2 = figure;
+        //            break;
+        //        case 3:
+        //            this.Position_3 = figure;
+        //            break;
+        //        case 4:
+        //            this.Position_4 = figure;
+        //            break;
+        //        default:
+        //            throw new Exception("Invalid Figure Enum");
+        //    }
+        // }
+
+        public void SetPosition(DestinationCellFigureHoldersEnum destinationCell, FigureEnum figure, PlayerEnum player)
         {
-            if (this.player != player) { throw new Exception("Player Does Match With The Destination House"); }
-            
-            switch (pos)
+            if (this.Player != player) { throw new Exception("Player Does Match With The Destination House"); }
+
+            switch (destinationCell)
             {
-                case 1:
+                case DestinationCellFigureHoldersEnum.Place1:
                     this.Position_1 = figure;
                     break;
-                case 2:
+                case DestinationCellFigureHoldersEnum.Place2:
                     this.Position_2 = figure;
                     break;
-                case 3:
+                case DestinationCellFigureHoldersEnum.Place3:
                     this.Position_3 = figure;
                     break;
-                case 4:
+                case DestinationCellFigureHoldersEnum.Place4:
                     this.Position_4 = figure;
                     break;
                 default:
-                    throw new Exception("Invalid Figure Enum");
+                    throw new Exception("Invalid Destination Cell");
             }
-        }
+        }  
 
         public void RemovePlayer(int pos, FigureEnum figure, PlayerEnum player)
         {
