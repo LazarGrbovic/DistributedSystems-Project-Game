@@ -53,14 +53,6 @@ namespace Game_Logic
             this.gameboard.Cells[oldPos].RemovePlayer();
             
             int newPos = GameManagerUtility.CalculateNewPos(oldPos, dice);
-            
-            //if (this.gameboard.Cells[newPos].Player != PlayerEnum.NoPlayer)
-            //{ 
-            //    var oldplayer = this.GetPlayerByPlayerEnum(this.gameboard.Cells[newPos].Player);
-            //    var oldPlayerFigure = this.gameboard.Cells[newPos].Figure;
-            //    oldplayer.DecreaseActiveFiguresAndIncreaseStartFigures(oldPlayerFigure);
-            //}
-
 
             this.UpdatePlayerAndGameboardFigures(newPos, player, figureInput);
         }
@@ -100,10 +92,6 @@ namespace Game_Logic
 
         private void UpdatePlayerAndGameboardFigures(int pos, Player player, FigureEnum figure)
         {
-            //if (this.gameboard.Cells[pos].Player == PlayerEnum.NoPlayer) 
-            //{ 
-            //    player.DecreaseFiguresAtStart(figure);
-            //}
             if (this.gameboard.Cells[pos].Player != PlayerEnum.NoPlayer)
             {
                 var oldFigure = this.gameboard.Cells[pos].Figure;
